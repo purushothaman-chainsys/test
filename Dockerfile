@@ -1,6 +1,6 @@
-FROM alpine
+FROM java:8-jdk-alpine
 
-COPY ./test/ /usr/app
+COPY /var/lib/jenkins/workspace/Docker_build_publish/ /usr/app
 
 WORKDIR	/usr/app
 
