@@ -1,4 +1,4 @@
-FROM java:8-jdk-alpine
+FROM alpine
 
 COPY ./test/ /usr/app
 
