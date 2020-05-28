@@ -1,0 +1,243 @@
+<csv-reformat>
+<!-- 
+	Sets the minimum number of columns there should be.  If there are fewer columns found
+	in any line of the CSV file, it will throw an error
+ -->
+	<minimum-columns value="2"/>
+<!-- 
+	This sets the delimiter.  Usually if a string is in a CSV value, it's in double quotes
+	in case there is a comma in the string.  There should be no need to change this
+ -->
+	<delimiter value=''/>
+<!-- 
+	This sets the separator.
+ -->
+	<separator value=","/>
+<!-- 
+	This sets the new separator.  If it's not specified, the separator is used
+ -->
+	<new-separator value=","/>
+
+	<column number="1">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="2">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="3">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="4">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="5">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="6">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="7">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="8">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="9">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>    
+	<column number="10">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>  
+	<column number="11">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="12">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="13">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="14">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="15">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="16">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="17">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="18">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="19">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>    
+	<column number="20">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>  
+	<column number="21">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="22">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="23">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="24">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="25">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="26">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="27">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="28">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="29">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>    
+	<column number="30">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>  
+	<column number="31">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="32">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="33">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="34">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="35">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>  
+
+	<column number="36">
+		<remove value="false"/>
+		<column-heading name="Supplier"/>
+	</column>
+	<column number="37">
+		<remove value="false"/>
+		<column-heading name="Priority"/>
+	</column>
+	<column number="38">
+		<remove value="false"/>
+		<column-heading name="PerfQtr"/>
+	</column>
+	<column number="39">
+		<remove value="false"/>
+		<column-heading name="PerfPd"/>
+	</column>
+	<column number="40">
+		<remove value="false"/>
+		<column-heading name="Total Received"/>
+	</column>
+	<column number="41">
+		<remove value="false"/>
+		<column-heading name="Plays Received"/>
+	</column>   
+	<column number="42">
+		<remove value="false"/>
+		<column-heading name="Parse Errors"/>
+	</column>
+	<column number="43">
+		<remove value="false"/>
+		<column-heading name="Validation Errors"/>
+	</column>
+	<column number="44">
+		<remove value="false"/>
+		<column-heading name="Learned Deletes"/>
+	</column>
+	<column number="45">
+		<remove value="false"/>
+		<column-heading name="Total Not Processed"/>
+	</column>
+	<column number="46">
+		<remove value="false"/>
+		<column-heading name="Sample Selection"/>
+	</column>
+	<column number="47">
+		<remove value="false"/>
+		<column-heading name="Learned-Id"/>
+	</column>  
+	<column number="48">
+		<remove value="false"/>
+		<column-heading name="Learned-Text"/>
+	</column>
+	<column number="49">
+		<remove value="false"/>
+		<column-heading name="Fuzzy Match"/>
+	</column>
+	<column number="50">
+		<remove value="false"/>
+		<column-heading name="Manual Match"/>
+	</column>
+	<column number="51">
+		<remove value="false"/>
+		<column-heading name="Unmatched"/>
+	</column>
+	<column number="52">
+		<remove value="false"/>
+		<column-heading name="Unmatched %"/>
+	</column>
+	<column number="53">
+		<remove value="false"/>
+		<column-heading name="Total Matched"/>
+	</column>  
+	<column number="54">
+		<remove value="false"/>
+		<column-heading name="Matched %"/>
+	</column>
+	<column number="55">
+		<remove value="false"/>
+		<column-heading name="Reviewed %"/>
+	</column> 
+
+</csv-reformat>

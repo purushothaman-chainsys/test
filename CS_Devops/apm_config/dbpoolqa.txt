@@ -1,0 +1,14 @@
+ascapds.jdbc.classname=oracle.jdbc.driver.OracleDriver
+ascapds.jdbc.url=jdbc:oracle:oci:@prep_dev.ascap.com
+ascapds.jdbc.username=APMONLINE
+ascapds.jdbc.password=1ufUeZ1z28ORevCKIhLsUA==
+ascapds.jdbc.minpool=5
+ascapds.jdbc.maxpool=10
+
+
+eods.jdbc.classname=com.microsoft.sqlserver.jdbc.SQLServerDriver
+eods.jdbc.url=jdbc:sqlserver://QWSQL16.ASCAP.COM:50521;databaseName=FileInventory;
+eods.jdbc.username=DataStageUser
+eods.jdbc.password=kmfsG/bc+ko=
+eods.jdbc.minpool=5
+eods.jdbc.maxpool=10

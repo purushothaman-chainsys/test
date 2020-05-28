@@ -1,0 +1,97 @@
+<csv-reformat>
+<!-- 
+	Sets the minimum number of columns there should be.  If there are fewer columns found
+	in any line of the CSV file, it will throw an error
+ -->
+	<minimum-columns value="2"/>
+<!-- 
+	This sets the delimiter.  Usually if a string is in a CSV value, it's in double quotes
+	in case there is a comma in the string.  There should be no need to change this
+ -->
+	<delimiter value=''/>
+<!-- 
+	This sets the separator.
+ -->
+	<separator value=","/>
+<!-- 
+	This sets the new separator.  If it's not specified, the separator is used
+ -->
+	<new-separator value=","/>
+
+	<column number="1">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="2">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="3">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="4">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="5">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="6">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="7">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="8">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="9">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="10">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="11">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>	
+	<column number="12">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>	
+	<column number="13">
+		<remove value="false"/>
+		<column-heading name="Music User Type"/>
+	</column>	
+	<column number="14">
+		<remove value="false"/>
+		<column-heading name="# of WPs matched and posted for PRIOR Qtr"/>
+	</column>
+	<column number="15">
+		<remove value="false"/>
+		<column-heading name="# of WPs matched and posted for CURRENT Qtr"/>
+	</column>
+	<column number="16">
+		<remove value="false"/>
+		<column-heading name="# of WPs matched but not posted due to errors for PRIOR Qtr"/>
+	</column>
+	<column number="17">
+		<remove value="false"/>
+		<column-heading name="# of WPs matched but not posted due to errors for CURRENT Qtr"/>
+	</column>
+	<column number="18">
+		<remove value="false"/>
+		<column-heading name="# of WPs not matched and MOVED for PRIOR Qtr"/>
+	</column>
+	<column number="19">
+		<remove value="false"/>
+		<column-heading name="# of WPs not matched and MOVED for CURRENT Qtr"/>
+	</column>
+</csv-reformat>
