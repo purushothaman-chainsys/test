@@ -271,7 +271,7 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.3</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/ojdbc6-11.2.0.3.jar</systemPath>
+			<systemPath>${APM_LIBS}/ojdbc6-11.2.0.3.jar</systemPath>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
@@ -617,7 +617,7 @@
 			<artifactId>sqljdbc4</artifactId>
 			<version>4.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/sqljdbc4.jar</systemPath>
+			<systemPath>${APM_LIBS}/sqljdbc4.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -625,7 +625,7 @@
 			<artifactId>bcm</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/bcm.jar</systemPath>
+			<systemPath>${APM_LIBS}/bcm.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -633,7 +633,7 @@
 			<artifactId>cecore</artifactId>
 			<version>1.3</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/cecore.jar</systemPath>
+			<systemPath>${APM_LIBS}/cecore.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -641,7 +641,7 @@
 			<artifactId>celib</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/celib.jar</systemPath>
+			<systemPath>${APM_LIBS}/celib.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -649,7 +649,7 @@
 			<artifactId>cesession</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/cesession.jar</systemPath>
+			<systemPath>${APM_LIBS}/cesession.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -657,7 +657,7 @@
 			<artifactId>logging</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/logging.jar</systemPath>
+			<systemPath>${APM_LIBS}/logging.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -665,7 +665,7 @@
 			<artifactId>ceaspect</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/ceaspect.jar</systemPath>
+			<systemPath>${APM_LIBS}/ceaspect.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -673,7 +673,7 @@
 			<artifactId>TraceLog</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/TraceLog.jar</systemPath>
+			<systemPath>${APM_LIBS}/TraceLog.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -681,7 +681,7 @@
 			<artifactId>corbaidl</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/corbaidl.jar</systemPath>
+			<systemPath>${APM_LIBS}/corbaidl.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -689,7 +689,7 @@
 			<artifactId>ebus405</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/ebus405.jar</systemPath>
+			<systemPath>${APM_LIBS}/ebus405.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -697,7 +697,7 @@
 			<artifactId>cryptojFIPS</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/cryptojFIPS.jar</systemPath>
+			<systemPath>${APM_LIBS}/cryptojFIPS.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -705,7 +705,7 @@
 			<artifactId>cereports</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/cereports.jar</systemPath>
+			<systemPath>${APM_LIBS}/cereports.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -713,7 +713,7 @@
 			<artifactId>CrystalReportsSDK</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/CrystalReportsSDK.jar</systemPath>
+			<systemPath>${APM_LIBS}/CrystalReportsSDK.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -721,7 +721,7 @@
 			<artifactId>SL_plugins</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/SL_plugins.jar</systemPath>
+			<systemPath>${APM_LIBS}/SL_plugins.jar</systemPath>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
@@ -736,7 +736,7 @@
 			<artifactId>webreporting</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/webreporting.jar</systemPath>
+			<systemPath>${APM_LIBS}/webreporting.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -744,7 +744,7 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.8</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/httpclient-4.5.8.jar</systemPath>
+			<systemPath>${APM_LIBS}/httpclient-4.5.8.jar</systemPath>
 		</dependency>
 
 	</dependencies>
