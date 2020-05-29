@@ -1,7 +1,8 @@
 FROM java:8-jdk-alpine
 
-COPY ./lib/ /usr/app
+COPY ./CS_Devops /usr/app
 
-WORKDIR	/usr/app
+WORKDIR /usr/app
 
-ENTRYPOINT ["java","-cp", "lib/*","com.chainsys.microservices.Application"]
+ENTRYPOINT ["java","jar", "apm/*","apm-1.0.0-SNAPSHOT.jar"]
+
