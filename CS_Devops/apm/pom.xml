@@ -271,7 +271,7 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.3</version>
 			<scope>system</scope>
-			<systemPath>C:/apm_config/ojdbc6-11.2.0.3.jar</systemPath>
+			<systemPath>${APM_LIBS}/ojdbc6-11.2.0.3.jar</systemPath>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
