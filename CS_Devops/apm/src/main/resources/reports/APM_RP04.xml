@@ -1,0 +1,105 @@
+<csv-reformat>
+<!-- 
+	Sets the minimum number of columns there should be.  If there are fewer columns found
+	in any line of the CSV file, it will throw an error
+ -->
+	<minimum-columns value="2"/>
+<!-- 
+	This sets the delimiter.  Usually if a string is in a CSV value, it's in double quotes
+	in case there is a comma in the string.  There should be no need to change this
+ -->
+	<delimiter value=''/>
+<!-- 
+	This sets the separator.
+ -->
+	<separator value=","/>
+<!-- 
+	This sets the new separator.  If it's not specified, the separator is used
+ -->
+	<new-separator value=","/>
+
+	<column number="1">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="2">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="3">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="4">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="5">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="6">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="7">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="8">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="9">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="10">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="11">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="12">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>
+	<column number="13">
+		<remove value="true"/>
+		<column-heading name=""/>
+	</column>	
+	<column number="14">
+		<remove value="false"/>
+		<column-heading name="BATCHMATCHID"/>
+	</column>	
+	<column number="15">
+		<remove value="false"/>
+		<column-heading name="SUPPLIER"/>
+	</column>
+	<column number="16">
+		<remove value="false"/>
+		<column-heading name="TITLE"/>
+	</column>
+	<column number="17">
+		<remove value="false"/>
+		<column-heading name="ARTIST"/>
+	</column>
+	<column number="18">
+		<remove value="false"/>
+		<column-heading name="WRITER"/>
+	</column>
+	<column number="19">
+		<remove value="false"/>
+		<column-heading name="WORKID"/>
+	</column>
+	<column number="20">
+		<remove value="false"/>
+		<column-heading name="MATCH COUNT"/>
+	</column>
+	<column number="21">
+		<remove value="false"/>
+		<column-heading name="ELIMINATION_REASON"/>
+	</column>
+</csv-reformat>
