@@ -90,7 +90,7 @@ pipeline
                     {
                         script
                         {	
-							def commit ="${BUILD_NUMBER}"
+							def version ="${BUILD_NUMBER}"
 							def commit = "${env.GIT_COMMIT}".substring(0,7)
 							print("${BUILD_NUMBER}-${commit}")  
 							createNexusTag(project, image, version, commit, nexus_host)
