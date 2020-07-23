@@ -62,10 +62,10 @@ pipeline
                     {
                         script
                         {
-                           def version = sh (script: "${mvn} -v", returnStdout: true).trim()
+                           def version = sh (script: "${mvn} -v", returnStdout: true).substring(15,19)
 						   def commit = "${env.GIT_COMMIT}".substring(0,7)
 						   print("verions :${version} commit -${commit} - ${project}/${image}")                           
-                           //sh 'docker build -f Dockerfile -t ${project}/${image}:$version .'
+						   sh 'docker build -f Dockerfile -t ${project}/${image}:${version} .'
                           
                         }
                     }
