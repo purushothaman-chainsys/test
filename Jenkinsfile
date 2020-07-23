@@ -60,7 +60,7 @@ pipeline
                 {
 					when
 					{
-						branch main_branch
+						
 						expression {nexus_flag}
 					}
                     steps
