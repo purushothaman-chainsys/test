@@ -1,4 +1,5 @@
 project="testonchainsys"
+image="cys"
 nexus_host="18.216.188.59:8081"
 nexus_url="18.216.188.59"
 nexus_port= 8085 /* port for docker push */
@@ -12,7 +13,7 @@ pipeline
         mvn ="/opt/apache-maven-3.6.3/bin/mvn"
         docker_registry = "testonchainsys"
         docker_cred= "Docker_hub"
-        DockerImage=''
+        //DockerImage=''
     }
         stages
             {
@@ -61,15 +62,16 @@ pipeline
                     {
                         script
                         {
-                           //DockerImage = docker.build docker_registry + ":$BUILD_NUMBER"
-                           
-                           sh 'docker build -f Dockerfile -t $docker_registry:$BUILD_NUMBER .'
+                           def version = sh (script: "${mvn} -v", returnStdout: true).trim()
+						   def commit = "${env.GIT_COMMIT}".substring(0,7)
+						   print("${version}-${commit}")                           
+                           sh 'docker build -f Dockerfile -t $project/$image:$version .'
                           
                         }
                     }
                 }
                 
-                stage('Push Docker Image to Nexus')
+                /*stage('Push Docker Image to Nexus')
                 {
                     steps
                     {
@@ -83,7 +85,7 @@ pipeline
                             }
                         }
                     }
-                }
+                }*/
         }
         
 }
