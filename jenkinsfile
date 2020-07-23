@@ -16,14 +16,14 @@ pipeline
     }
         stages
             {
-                stage('checkout git repo')
+                /*stage('checkout git repo')
                 {
                     steps
                     {
                         //cleanWs()
                         git changelog: false, poll: false, url: 'https://github.com/purushothaman-chainsys/test.git'
                     }
-                }
+                }*/
                 stage('moving dependency packages')
                 {
                     steps
