@@ -1,5 +1,5 @@
-project="testonchainsys"
-image="cys"
+project='testonchainsys'
+image='cys'
 nexus_host="18.216.188.59:8081"
 nexus_url="18.216.188.59"
 nexus_port= 8085 /* port for docker push */
@@ -64,8 +64,8 @@ pipeline
                         {
                            def version = sh (script: "${mvn} -v", returnStdout: true).trim()
 						   def commit = "${env.GIT_COMMIT}".substring(0,7)
-						   print("${version}-${commit}")                           
-                           sh "docker build -f Dockerfile -t $project/$image:$version ."
+						   //print("${version}-${commit}")                           
+                           sh 'docker build -f Dockerfile -t $project/$image:$version .'
                           
                         }
                     }
