@@ -1,7 +1,7 @@
 project='testonchainsys'
 image='cys'
-nexus_host="18.216.188.59:8081"
-nexus_url="18.216.188.59"
+nexus_host="18.216.188.59"
+
 nexus_port= 8085 /* port for docker push */
 nexus_flag = true
 main_branch = 'master'
@@ -68,7 +68,7 @@ pipeline
 						
                         script
                         {
-                          
+						   def version = "$BUILD_NUMBER"
 						   def commit = "${env.GIT_COMMIT}".substring(0,7)
 						   print("${BUILD_NUMBER}-${commit}")                           
 						   sh "docker build --no-cache -t ${project}/${image}:${BUILD_NUMBER} -f Dockerfile ."
@@ -77,23 +77,56 @@ pipeline
                     }
                 }
                 
-                /*stage('Push Docker Image to Nexus')
+                stage('Push Docker Image to Nexus')
                 {
+					when
+					{
+						
+						expression {nexus_flag}
+						expression { shouldPublishToNexus(project, image, nexus_host) }
+						
+					}
                     steps
                     {
                         script
-                        {
+                        {	
+							def commit = "${env.GIT_COMMIT}".substring(0,7)
+							print("${BUILD_NUMBER}-${commit}")  
+							createNexusTag(project, image, version, commit, nexus_host)
                             withCredentials([usernamePassword(credentialsId: 'NexusAdmin', passwordVariable: 'nexus_pswd', usernameVariable: 'nexus_user')])
                             {
-                                sh "docker login -u $nexus_user -p $nexus_pswd $nexus_url:$nexus_port"
-                                sh "docker tag $docker_registry:$BUILD_NUMBER $nexus_url:$nexus_port/$docker_registry:$BUILD_NUMBER"
-                                sh "docker push $nexus_url:$nexus_port/$docker_registry:$BUILD_NUMBER"
+                                sh "docker login -u $nexus_user -p $nexus_pswd $nexus_host:$nexus_port"
+                                sh "docker tag $docker_registry:$BUILD_NUMBER $nexus_host:$nexus_port/$docker_registry:$BUILD_NUMBER"
+                                sh "docker push $nexus_host:$nexus_port/$docker_registry:$BUILD_NUMBER"
                             }
                         }
                     }
-                }*/
+                }
         }
         
 }
-
+def shouldPublishToNexus(String app_name, String target, String nexus_host)
+{
+    def version ="$BUILD_NUMBER"
+    def commit    = "${env.GIT_COMMIT}".substring(0,7)
+    def nexus_tag = readNexusTag(app_name, target, version, nexus_host)
+    print "nexus_tag: ${nexus_tag}"
+    if (nexus_tag == null)
+        return true
+    if (nexus_tag['commit'] == commit)
+        return false
+    else
+        error "artifact version already exists with a different commit"
+}
+def readNexusTag(String app_name, String target, String version, String nexus_host)
+{
+    def tag_name  = "${app_name}-${target}-${version}"
+    def nexus_url = "https://${nexus_host}/service/rest/v2/tags/${tag_name}"
+    def response  = httpRequest httpMode: 'GET', url: nexus_url, authentication: 'NexusAdmin', validResponseCodes: '200,404', acceptType: 'APPLICATION_JSON'
+    if (response.status == 200)
+    {
+        def data = readJSON text: response.content
+        return data['attributes']
+    }
+}
  
