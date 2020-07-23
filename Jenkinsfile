@@ -1,7 +1,6 @@
-project='testonchainsys'
-image='cys'
-nexus_host="18.216.188.59"
-nexus_default_port=8081
+project="testonchainsys"
+nexus_host="18.216.188.59:8081"
+nexus_url="18.216.188.59"
 nexus_port= 8085 /* port for docker push */
 nexus_flag = true
 main_branch = 'master'
@@ -13,7 +12,7 @@ pipeline
         mvn ="/opt/apache-maven-3.6.3/bin/mvn"
         docker_registry = "testonchainsys"
         docker_cred= "Docker_hub"
-        //DockerImage=''
+        DockerImage=''
     }
         stages
             {
@@ -58,20 +57,13 @@ pipeline
                 }
                 stage('Build Docker Image')
                 {
-					when
-					{
-						
-						expression {nexus_flag}
-					}
                     steps
                     {
-						
                         script
                         {
-						   def version = "$BUILD_NUMBER"
-						   def commit = "${env.GIT_COMMIT}".substring(0,7)
-						   print("${BUILD_NUMBER}-${commit}")                           
-						   sh "docker build --no-cache -t ${project}/${image}:${BUILD_NUMBER} -f Dockerfile ."
+                           //DockerImage = docker.build docker_registry + ":$BUILD_NUMBER"
+                           
+                           sh 'docker build -f Dockerfile -t $docker_registry:$BUILD_NUMBER .'
                           
                         }
                     }
@@ -79,26 +71,15 @@ pipeline
                 
                 stage('Push Docker Image to Nexus')
                 {
-					when
-					{
-						
-						expression {nexus_flag}
-						//expression { shouldPublishToNexus(project, image, nexus_host) }
-						
-					}
                     steps
                     {
                         script
-                        {	
-							def version ="${BUILD_NUMBER}"
-							def commit = "${env.GIT_COMMIT}".substring(0,7)
-							print("${BUILD_NUMBER}-${commit}")  
-							//createNexusTag(project, image, version, commit, nexus_host)
+                        {
                             withCredentials([usernamePassword(credentialsId: 'NexusAdmin', passwordVariable: 'nexus_pswd', usernameVariable: 'nexus_user')])
                             {
-                                sh "docker login -u $nexus_user -p $nexus_pswd $nexus_host:$nexus_port"
-                                sh "docker tag ${project}/${image}:${BUILD_NUMBER} $nexus_host:$nexus_port/${project}/${image}:${BUILD_NUMBER}"
-                                sh "docker push $nexus_host:$nexus_port/$docker_registry:$BUILD_NUMBER"
+                                sh "docker login -u $nexus_user -p $nexus_pswd $nexus_url:$nexus_port"
+                                sh "docker tag $docker_registry:$BUILD_NUMBER $nexus_url:$nexus_port/$docker_registry:$BUILD_NUMBER"
+                                sh "docker push $nexus_url:$nexus_port/$docker_registry:$BUILD_NUMBER"
                             }
                         }
                     }
@@ -106,3 +87,5 @@ pipeline
         }
         
 }
+
+ 
