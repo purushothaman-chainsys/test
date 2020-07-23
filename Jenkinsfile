@@ -83,7 +83,7 @@ pipeline
 					{
 						
 						expression {nexus_flag}
-						expression { shouldPublishToNexus(project, image, nexus_host) }
+						//expression { shouldPublishToNexus(project, image, nexus_host) }
 						
 					}
                     steps
@@ -93,7 +93,7 @@ pipeline
 							def version ="${BUILD_NUMBER}"
 							def commit = "${env.GIT_COMMIT}".substring(0,7)
 							print("${BUILD_NUMBER}-${commit}")  
-							createNexusTag(project, image, version, commit, nexus_host)
+							//createNexusTag(project, image, version, commit, nexus_host)
                             withCredentials([usernamePassword(credentialsId: 'NexusAdmin', passwordVariable: 'nexus_pswd', usernameVariable: 'nexus_user')])
                             {
                                 sh "docker login -u $nexus_user -p $nexus_pswd $nexus_host:$nexus_port"
@@ -106,36 +106,3 @@ pipeline
         }
         
 }
-def shouldPublishToNexus(String app_name, String target, String nexus_host)
-{
-    def version ="$BUILD_NUMBER"
-    def commit    = "${env.GIT_COMMIT}".substring(0,7)
-    def nexus_tag = readNexusTag(app_name, target, version, nexus_host)
-    print "nexus_tag: ${nexus_tag}"
-    if (nexus_tag == null)
-        return true
-    if (nexus_tag['commit'] == commit)
-        return false
-    else
-        error "artifact version already exists with a different commit"
-}
-def readNexusTag(String app_name, String target, String version, String nexus_host)
-{
-    def tag_name  = "${app_name}-${target}-${version}"
-    def nexus_url = "http://${nexus_host}:${nexus_default_port}/service/rest/v1/tags/${tag_name}"
-    def response  = httpRequest httpMode: 'GET', url: nexus_url, authentication: 'NexusAdmin', validResponseCodes: '200,404', acceptType: 'APPLICATION_JSON'
-    if (response.status == 200)
-    {
-        def data = readJSON text: response.content
-        return data['attributes']
-    }
-}
-def createNexusTag(String app_name, String target, String version, String commit, String nexus_host)
-{
-    def nexus_url = "http://${nexus_host}:${nexus_default_port}/service/rest/v1/tags"
-    def tag_name  = "${app_name}-${target}-${version}"
-    def payload   = [name: "${tag_name}", attributes: [name:"${app_name}",commit:"${commit}", version:"${version}", target:"${target}"]]
-    def toJson    = {input -> groovy.json.JsonOutput.toJson(input)}
-    def response  = httpRequest httpMode: 'POST', url: nexus_url, authentication: 'NexusAdmin', requestBody: toJson(payload), validResponseCodes: '200', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON'
-}
- 
