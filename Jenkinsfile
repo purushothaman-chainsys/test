@@ -64,8 +64,8 @@ pipeline
                         {
                            def version = sh (script: "${mvn} -v", returnStdout: true).substring(13,19)
 						   def commit = "${env.GIT_COMMIT}".substring(0,7)
-						   print("verions :${version} commit -${commit} - ${project}/${image}")                           
-						   sh "docker build --no-cache -t ${project}/${image}:${version} -f Dockerfile"
+						   print("verions :${BUILD_NUMBER} commit -${commit} - ${project}/${image}")                           
+						   sh "docker build --no-cache -t ${project}/${image}:${BUILD_NUMBER} -f Dockerfile"
                           
                         }
                     }
