@@ -1,7 +1,7 @@
 project='testonchainsys'
 image='cys'
 nexus_host="18.216.188.59"
-
+nexus_default_port:8081
 nexus_port= 8085 /* port for docker push */
 nexus_flag = true
 main_branch = 'master'
@@ -121,12 +121,20 @@ def shouldPublishToNexus(String app_name, String target, String nexus_host)
 def readNexusTag(String app_name, String target, String version, String nexus_host)
 {
     def tag_name  = "${app_name}-${target}-${version}"
-    def nexus_url = "https://${nexus_host}/service/rest/v2/tags/${tag_name}"
+    def nexus_url = "https://${nexus_host}:${nexus_default_port}/service/rest/v2/tags/${tag_name}"
     def response  = httpRequest httpMode: 'GET', url: nexus_url, authentication: 'NexusAdmin', validResponseCodes: '200,404', acceptType: 'APPLICATION_JSON'
     if (response.status == 200)
     {
         def data = readJSON text: response.content
         return data['attributes']
     }
+}
+def createNexusTag(String app_name, String target, String version, String commit, String nexus_host)
+{
+    def nexus_url = "https://${nexus_host}:${nexus_default_port}/service/rest/v1/tags"
+    def tag_name  = "${app_name}-${target}-${version}"
+    def payload   = [name: "${tag_name}", attributes: [name:"${app_name}",commit:"${commit}", version:"${version}", target:"${target}"]]
+    def toJson    = {input -> groovy.json.JsonOutput.toJson(input)}
+    def response  = httpRequest httpMode: 'POST', url: nexus_url, authentication: 'NexusAdmin', requestBody: toJson(payload), validResponseCodes: '200', acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON'
 }
  
