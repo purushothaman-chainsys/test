@@ -1,7 +1,7 @@
 project='testonchainsys'
 image='cys'
 nexus_host="18.216.188.59"
-nexus_default_port:8081
+nexus_default_port=8081
 nexus_port= 8085 /* port for docker push */
 nexus_flag = true
 main_branch = 'master'
