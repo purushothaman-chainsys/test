@@ -60,6 +60,11 @@ pipeline
                 {
                     steps
                     {
+						when
+						{
+							branch main_branch
+							expression {nexus_flag}
+						}
                         script
                         {
                           
