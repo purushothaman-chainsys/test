@@ -90,13 +90,14 @@ pipeline
                     {
                         script
                         {	
+							def commit ="${BUILD_NUMBER}"
 							def commit = "${env.GIT_COMMIT}".substring(0,7)
 							print("${BUILD_NUMBER}-${commit}")  
 							createNexusTag(project, image, version, commit, nexus_host)
                             withCredentials([usernamePassword(credentialsId: 'NexusAdmin', passwordVariable: 'nexus_pswd', usernameVariable: 'nexus_user')])
                             {
                                 sh "docker login -u $nexus_user -p $nexus_pswd $nexus_host:$nexus_port"
-                                sh "docker tag $docker_registry:$BUILD_NUMBER $nexus_host:$nexus_port/$docker_registry:$BUILD_NUMBER"
+                                sh "docker tag ${project}/${image}:${BUILD_NUMBER} $nexus_host:$nexus_port/${project}/${image}:${BUILD_NUMBER}"
                                 sh "docker push $nexus_host:$nexus_port/$docker_registry:$BUILD_NUMBER"
                             }
                         }
@@ -121,7 +122,7 @@ def shouldPublishToNexus(String app_name, String target, String nexus_host)
 def readNexusTag(String app_name, String target, String version, String nexus_host)
 {
     def tag_name  = "${app_name}-${target}-${version}"
-    def nexus_url = "http://${nexus_host}:${nexus_default_port}/service/rest/v2/tags/${tag_name}"
+    def nexus_url = "http://${nexus_host}:${nexus_default_port}/v2/testonchainsys/tags/${tag_name}"
     def response  = httpRequest httpMode: 'GET', url: nexus_url, authentication: 'NexusAdmin', validResponseCodes: '200,404', acceptType: 'APPLICATION_JSON'
     if (response.status == 200)
     {
@@ -131,7 +132,7 @@ def readNexusTag(String app_name, String target, String version, String nexus_ho
 }
 def createNexusTag(String app_name, String target, String version, String commit, String nexus_host)
 {
-    def nexus_url = "http://${nexus_host}:${nexus_default_port}/service/rest/v1/tags"
+    def nexus_url = "http://${nexus_host}:${nexus_default_port}/v2/testonchainsys/tags"
     def tag_name  = "${app_name}-${target}-${version}"
     def payload   = [name: "${tag_name}", attributes: [name:"${app_name}",commit:"${commit}", version:"${version}", target:"${target}"]]
     def toJson    = {input -> groovy.json.JsonOutput.toJson(input)}
