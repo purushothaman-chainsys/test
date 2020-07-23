@@ -58,13 +58,14 @@ pipeline
                 }
                 stage('Build Docker Image')
                 {
+					when
+					{
+						branch main_branch
+						expression {nexus_flag}
+					}
                     steps
                     {
-						when
-						{
-							branch main_branch
-							expression {nexus_flag}
-						}
+						
                         script
                         {
                           
