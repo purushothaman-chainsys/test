@@ -1,4 +1,5 @@
 project="testonchainsys"
+image="apmtest"
 nexus_host="18.216.188.59:8081"
 nexus_url="18.216.188.59"
 nexus_port= 8085 /* port for docker push */
@@ -11,6 +12,7 @@ pipeline
     {
         mvn ="/opt/apache-maven-3.6.3/bin/mvn"
         docker_registry = "testonchainsys"
+        
         docker_cred= "Docker_hub"
         DockerImage=''
     }
@@ -71,10 +73,19 @@ pipeline
                 
                 stage('Push Docker Image to Nexus')
                 {
+                    when 
+                    {
+                         expression {nexus_flag}
+                         expression { shouldPublishToNexus(project, image, nexus_host) }
+                    }
                     steps
                     {
                         script
-                        {
+                        {   
+                            def version = sh (script: "./mvnw -q -v", returnStdout: true).trim()
+                            def commit  = "${env.GIT_COMMIT}".substring(0,7)
+                            print("${version}-${commit}")
+                            createNexusTag(project, image, version, commit, nexus_host)
                             withCredentials([usernamePassword(credentialsId: 'NexusAdmin', passwordVariable: 'nexus_pswd', usernameVariable: 'nexus_user')])
                             {
                                 sh "docker login -u $nexus_user -p $nexus_pswd $nexus_url:$nexus_port"
@@ -87,5 +98,29 @@ pipeline
         }
         
 }
+def shouldPublishToNexus(String app_name, String target, String nexus_host)
+{
+    def version = sh (script: "./mvnw -q -v", returnStdout: true).trim()
+    def commit    = "${env.GIT_COMMIT}".substring(0,7)
+    def nexus_tag = readNexusTag(app_name, target, version, nexus_host)
+    print "nexus_tag: ${nexus_tag}"
+    if (nexus_tag == null)
+        return true
+    if (nexus_tag['commit'] == commit)
+        return false
+    else
+        error "artifact version already exists with a different commit"
+}
 
+def readNexusTag(String app_name, String target, String version, String nexus_host)
+{
+    def tag_name  = "${app_name}-${target}-${version}"
+    def nexus_url = "https://${nexus_host}/service/rest/v1/tags/${tag_name}"
+    def response  = httpRequest httpMode: 'GET', url: nexus_url, authentication: 'NexusAdmin', validResponseCodes: '200,404', acceptType: 'APPLICATION_JSON'
+    if (response.status == 200)
+    {
+        def data = readJSON text: response.content
+        return data['attributes']
+    }
+}
  
