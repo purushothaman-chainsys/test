@@ -104,6 +104,7 @@ def shouldPublishToNexus(String app_name, String target, String nexus_host)
     def commit    = "${env.GIT_COMMIT}".substring(0,7)
     def nexus_tag = readNexusTag(app_name, target, version, nexus_host)
     print "nexus_tag: ${nexus_tag}"
+    print "commit value is ": ${commit}
     if (nexus_tag == null)
         return true
     if (nexus_tag['commit'] == commit)
