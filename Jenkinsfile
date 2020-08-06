@@ -65,7 +65,7 @@ pipeline
                         {
                            //DockerImage = docker.build docker_registry + ":$BUILD_NUMBER"
                            
-                           sh 'docker build -f Dockerfile -t $docker_registry:$BUILD_NUMBER .'
+                         //  sh 'docker build -f Dockerfile -t $docker_registry:$BUILD_NUMBER .'
                           
                         }
                     }
