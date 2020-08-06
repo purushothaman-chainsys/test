@@ -23,7 +23,7 @@ pipeline
                     steps
                     {
                         //cleanWs()
-                        git changelog: false, poll: false, url: 'https://github.com/purushothaman-chainsys/test.git'
+                        git url: 'https://github.com/purushothaman-chainsys/test.git'
                     }
                 }*/
                 stage('moving dependency packages')
@@ -82,9 +82,9 @@ pipeline
                     {
                         script
                         {   
-                            def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(0,10)
+                            def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(0,5)
                             def commit  = "${env.GIT_COMMIT}".substring(0,7)
-                            print("${version}-${commit}")
+                            print("print values are: ${version}-${commit}")
                             createNexusTag(project, image, version, commit, nexus_host)
                             withCredentials([usernamePassword(credentialsId: 'NexusAdmin', passwordVariable: 'nexus_pswd', usernameVariable: 'nexus_user')])
                             {
@@ -100,7 +100,7 @@ pipeline
 }
 def shouldPublishToNexus(String app_name, String target, String nexus_host)
 {
-    def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(0,11)
+    def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(0,5)
     def commit    = "${env.GIT_COMMIT}".substring(0,7)
     def nexus_tag = readNexusTag(app_name, target, version, nexus_host)
     print "nexus_tag: ${nexus_tag}"
