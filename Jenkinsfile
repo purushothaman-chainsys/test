@@ -65,8 +65,8 @@ pipeline
                         {
                            //DockerImage = docker.build docker_registry + ":$BUILD_NUMBER"
                            
-                         //  sh 'docker build -f Dockerfile -t $docker_registry:$BUILD_NUMBER .'
-                            sh 'sample'
+                          sh 'docker build -f Dockerfile -t $docker_registry:$BUILD_NUMBER .'
+                          //  sh 'sample'
                           
                         }
                     }
@@ -85,7 +85,7 @@ pipeline
                         {   
                             def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(0,5)
                             def commit  = "${env.GIT_COMMIT}".substring(0,7)
-                            print("print values are: ${version}-${commit}")
+                            print("print values are => ${version}-${commit}")
                             createNexusTag(project, image, version, commit, nexus_host)
                             withCredentials([usernamePassword(credentialsId: 'NexusAdmin', passwordVariable: 'nexus_pswd', usernameVariable: 'nexus_user')])
                             {
