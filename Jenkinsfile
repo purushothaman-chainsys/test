@@ -82,7 +82,7 @@ pipeline
                     {
                         script
                         {   
-                            def version = sh (script: "${mvn} -v", returnStdout: true).trim()
+                            def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(7,10)
                             def commit  = "${env.GIT_COMMIT}".substring(0,7)
                             print("${version}-${commit}")
                             createNexusTag(project, image, version, commit, nexus_host)
@@ -100,7 +100,7 @@ pipeline
 }
 def shouldPublishToNexus(String app_name, String target, String nexus_host)
 {
-    def version = sh (script: "${mvn} -v", returnStdout: true).trim()
+    def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(7,11)
     def commit    = "${env.GIT_COMMIT}".substring(0,7)
     def nexus_tag = readNexusTag(app_name, target, version, nexus_host)
     print "nexus_tag: ${nexus_tag}"
@@ -115,7 +115,7 @@ def shouldPublishToNexus(String app_name, String target, String nexus_host)
 def readNexusTag(String app_name, String target, String version, String nexus_host)
 {
     def tag_name  = "${app_name}-${target}-${version}"
-    def nexus_url = "https://${nexus_host}/service/rest/v1/tags/${tag_name}"
+    def nexus_url = "http://${nexus_host}/service/rest/v1/tags/${tag_name}"
     def response  = httpRequest httpMode: 'GET', url: nexus_url, authentication: 'NexusAdmin', validResponseCodes: '200,404', acceptType: 'APPLICATION_JSON'
     if (response.status == 200)
     {
