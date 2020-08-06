@@ -66,6 +66,7 @@ pipeline
                            //DockerImage = docker.build docker_registry + ":$BUILD_NUMBER"
                            
                          //  sh 'docker build -f Dockerfile -t $docker_registry:$BUILD_NUMBER .'
+                            sh 'sample'
                           
                         }
                     }
@@ -90,7 +91,7 @@ pipeline
                             {
                                 sh "docker login -u $nexus_user -p $nexus_pswd $nexus_url:$nexus_port"
                                 sh "docker tag $docker_registry:$BUILD_NUMBER $nexus_url:$nexus_port/$docker_registry:$BUILD_NUMBER"
-                                sh "docker push $nexus_url:$nexus_port/$docker_registry:$BUILD_NUMBER"
+                                //sh "docker push $nexus_url:$nexus_port/$docker_registry:$BUILD_NUMBER"
                             }
                         }
                     }
