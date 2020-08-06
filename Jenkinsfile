@@ -1,7 +1,7 @@
 project="testonchainsys"
 image="apmtest"
-nexus_host="18.216.188.59:8081"
-nexus_url="18.216.188.59"
+nexus_host=" http://3.129.16.232:8081"
+nexus_url=" http://3.129.16.232"
 nexus_port= 8085 /* port for docker push */
 nexus_flag = true
 main_branch = 'master'
