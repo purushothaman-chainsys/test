@@ -77,13 +77,13 @@ pipeline
                     when 
                     {
                          expression {nexus_flag}
-                        // expression { shouldPublishToNexus(project, image, nexus_host) }
+                         expression { shouldPublishToNexus(project, image, nexus_host) }
                     }
                     steps
                     {
                         script
                         {   
-                            def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(14,18)
+                            def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(13,18)
                             def commit  = "${env.GIT_COMMIT}".substring(0,7)
                             print("print values are => ${version}-${commit}")
                             createNexusTag(project, image, version, commit, nexus_host)
@@ -91,7 +91,7 @@ pipeline
                             {
                                 sh "docker login -u $nexus_user -p $nexus_pswd $nexus_url:$nexus_port"
                                 sh "docker tag $docker_registry:$BUILD_NUMBER $nexus_url:$nexus_port/$docker_registry:$BUILD_NUMBER"
-                                //sh "docker push $nexus_url:$nexus_port/$docker_registry:$BUILD_NUMBER"
+                                sh "docker push $nexus_url:$nexus_port/$docker_registry:$BUILD_NUMBER"
                             }
                         }
                     }
@@ -101,11 +101,11 @@ pipeline
 }
 def shouldPublishToNexus(String app_name, String target, String nexus_host)
 {
-    def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(14,18)
+    def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(13,18)
     def commit    = "${env.GIT_COMMIT}".substring(0,7)
     def nexus_tag = readNexusTag(app_name, target, version, nexus_host)
     print "nexus_tag: ${nexus_tag}"
-    print "commit value is ": ${commit}
+    print "commit value is : ${commit}"
     if (nexus_tag == null)
         return true
     if (nexus_tag['commit'] == commit)
