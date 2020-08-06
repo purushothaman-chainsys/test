@@ -76,7 +76,7 @@ pipeline
                     when 
                     {
                          expression {nexus_flag}
-                         expression { shouldPublishToNexus(project, image, nexus_host) }
+                        // expression { shouldPublishToNexus(project, image, nexus_host) }
                     }
                     steps
                     {
