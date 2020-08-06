@@ -83,7 +83,7 @@ pipeline
                     {
                         script
                         {   
-                            def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(0,5)
+                            def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(14,18)
                             def commit  = "${env.GIT_COMMIT}".substring(0,7)
                             print("print values are => ${version}-${commit}")
                             createNexusTag(project, image, version, commit, nexus_host)
@@ -101,7 +101,7 @@ pipeline
 }
 def shouldPublishToNexus(String app_name, String target, String nexus_host)
 {
-    def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(0,5)
+    def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(14,18)
     def commit    = "${env.GIT_COMMIT}".substring(0,7)
     def nexus_tag = readNexusTag(app_name, target, version, nexus_host)
     print "nexus_tag: ${nexus_tag}"
