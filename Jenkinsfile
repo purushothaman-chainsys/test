@@ -33,9 +33,12 @@ pipeline
                 {
                     steps
                     {
-                       
+                       script
+                        {
+                            def version = ${projectVersion}.trim().substring(13,18)
+                        }
                         
-                        sh 'echo ${projectVersion}'
+                        sh 'echo ${version}'
                         sh '${mvn} install:install-file -Dfile=${WORKSPACE}/CS_Devops/apm_config/ojdbc6-11.2.0.3.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3.0 -Dpackaging=jar'
                         sh '${mvn} install:install-file -Dfile=${WORKSPACE}/CS_Devops/apm_config/sqljdbc4.jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc4 -Dversion=4.0 -Dpackaging=jar'
                         sh '${mvn} install:install-file -Dfile=${WORKSPACE}/CS_Devops/apm_config/bcm.jar -DgroupId=bcm -DartifactId=bcm -Dversion=1.0 -Dpackaging=jar'
@@ -90,7 +93,7 @@ pipeline
                     {
                         script
                         {   
-                            def version = sh (script: "${mvn} -v", returnStdout: true).trim().substring(13,18)
+                            def version = ${projectVersion}.trim().substring(13,18)
                             def commit  = "${env.GIT_COMMIT}".substring(0,7)
                             print("print values are => ${version}-${commit}")
                             createNexusTag(project, image, version, commit, nexus_host)
