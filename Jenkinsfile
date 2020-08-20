@@ -14,8 +14,7 @@ pipeline
         docker_registry = "testonchainsys"
         //def project = new XmlSlurper().parse(new File("CS_Devops/apm/pom.xml"))
         //def pomv = project.version.toString()
-       // pom = readMavenPom(file: 'CS_Devops/apm/pom.xml')
-        //projectVersion = pom.getVersion()
+       
         docker_cred= "Docker_hub"
         DockerImage=''
     }
@@ -38,7 +37,9 @@ pipeline
                             def mvnVersion = sh (script: "${mvn} help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true)
                             sh 'echo "testing ${mvnVersion}"'
                         }
-                     
+                        pom = readMavenPom(file: 'CS_Devops/apm/pom.xml')
+                        projectVersion = pom.getVersion()
+                        sh 'echo ${projectVersion }'
                         sh '${mvn} install:install-file -Dfile=${WORKSPACE}/CS_Devops/apm_config/ojdbc6-11.2.0.3.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3.0 -Dpackaging=jar'
                         sh '${mvn} install:install-file -Dfile=${WORKSPACE}/CS_Devops/apm_config/sqljdbc4.jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc4 -Dversion=4.0 -Dpackaging=jar'
                         sh '${mvn} install:install-file -Dfile=${WORKSPACE}/CS_Devops/apm_config/bcm.jar -DgroupId=bcm -DartifactId=bcm -Dversion=1.0 -Dpackaging=jar'
