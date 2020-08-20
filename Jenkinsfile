@@ -12,7 +12,7 @@ pipeline
     {
         mvn ="/opt/apache-maven-3.6.3/bin/mvn"
         docker_registry = "testonchainsys"
-        pom = readMavenPom(file: '${WORKSPACE}/CS_Devops/apm/pom.xml')
+        pom = readMavenPom(file: 'CS_Devops/apm/pom.xml')
         projectVersion = pom.getVersion()
         docker_cred= "Docker_hub"
         DockerImage=''
