@@ -12,8 +12,9 @@ pipeline
     {
         mvn ="/opt/apache-maven-3.6.3/bin/mvn"
         docker_registry = "testonchainsys"
-        //def project = new XmlSlurper().parse(new File("CS_Devops/apm/pom.xml"))
-        //def pomv = project.version.toString()
+         pom = readMavenPom(file: 'CS_Devops/apm/pom.xml')
+         projectVersion = pom.getVersion()
+         sh 'echo ${projectVersion}'
        
         docker_cred= "Docker_hub"
         DockerImage=''
@@ -36,9 +37,9 @@ pipeline
                         {
                            // def mvnVersion = sh (script: "${mvn} help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true)
                             //sh 'echo "testing ${mvnVersion}"'
-                            pom = readMavenPom(file: 'CS_Devops/apm/pom.xml')
-                            projectVersion = pom.getVersion()
-                             sh 'echo ${projectVersion}'
+                            //pom = readMavenPom(file: 'CS_Devops/apm/pom.xml')
+                            //projectVersion = pom.getVersion()
+                             //sh 'echo ${projectVersion}'
                         }
                         
                         sh 'echo ${projectVersion}'
