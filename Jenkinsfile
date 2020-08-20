@@ -12,7 +12,8 @@ pipeline
     {
         mvn ="/opt/apache-maven-3.6.3/bin/mvn"
         docker_registry = "testonchainsys"
-        VERSION = readMavenPom().getVersion()
+        pom = readMavenPom(file: '${WORKSPACE}/CS_Devops/apm/pom.xml')
+        projectVersion = pom.getVersion()
         docker_cred= "Docker_hub"
         DockerImage=''
     }
@@ -64,7 +65,7 @@ pipeline
                         script
                         {
                            //DockerImage = docker.build docker_registry + ":$BUILD_NUMBER"
-                            sh 'echo ${VERSION}'
+                            sh 'echo ${projectVersion}'
                           sh 'docker build -f Dockerfile -t $docker_registry:$BUILD_NUMBER .'
                           //  sh 'sample'
                           
