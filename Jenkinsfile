@@ -35,7 +35,7 @@ pipeline
                     {
                         script
                         {
-                            def mvnVersion = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+                            def mvnVersion = sh script: '${mvn} help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
                             sh 'echo "testing ${mvnVersion}"'
                         }
                      
