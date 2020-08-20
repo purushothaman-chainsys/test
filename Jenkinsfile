@@ -12,7 +12,7 @@ pipeline
     {
         mvn ="/opt/apache-maven-3.6.3/bin/mvn"
         docker_registry = "testonchainsys"
-        def project = new XmlSlurper().parse(new File("pom.xml"))
+        def project = new XmlSlurper().parse(new File("CS_Devops/apm/pom.xml"))
         def pomv = project.version.toString()
        // pom = readMavenPom(file: 'CS_Devops/apm/pom.xml')
         //projectVersion = pom.getVersion()
