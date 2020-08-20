@@ -35,7 +35,8 @@ pipeline
                     {
                        script
                         {
-                            def version = projectVersion.trim().substring(13,18)
+                            def version = projectVersion.trim().substring(0,5)
+                            print("version of project is : ${version}")
                         }
                         
                         sh 'echo ${version}'
@@ -93,7 +94,7 @@ pipeline
                     {
                         script
                         {   
-                            def version = ${projectVersion}.trim().substring(13,18)
+                            def version = projectVersion.trim().substring(0,5)
                             def commit  = "${env.GIT_COMMIT}".substring(0,7)
                             print("print values are => ${version}-${commit}")
                             createNexusTag(project, image, version, commit, nexus_host)
