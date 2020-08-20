@@ -12,8 +12,10 @@ pipeline
     {
         mvn ="/opt/apache-maven-3.6.3/bin/mvn"
         docker_registry = "testonchainsys"
-        pom = readMavenPom(file: 'CS_Devops/apm/pom.xml')
-        projectVersion = pom.getVersion()
+        def project = new XmlSlurper().parse(new File("pom.xml"))
+        def pomv = project.version.toString()
+       // pom = readMavenPom(file: 'CS_Devops/apm/pom.xml')
+        //projectVersion = pom.getVersion()
         docker_cred= "Docker_hub"
         DockerImage=''
     }
@@ -34,7 +36,7 @@ pipeline
                         script
                         {
                             def mvnVersion = sh "${mvn} help:evaluate -Dexpression=project.version | grep -e '^[^\\[]'"
-                            sh 'echo ${mvnVersion}'
+                            sh 'echo "testing ${pomv}"'
                         }
                      
                         sh '${mvn} install:install-file -Dfile=${WORKSPACE}/CS_Devops/apm_config/ojdbc6-11.2.0.3.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3.0 -Dpackaging=jar'
