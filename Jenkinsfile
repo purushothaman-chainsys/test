@@ -14,7 +14,7 @@ pipeline
         docker_registry = "testonchainsys"
          pom = readMavenPom(file: 'CS_Devops/apm/pom.xml')
          projectVersion = pom.getVersion()
-         sh 'echo ${projectVersion}'
+        // sh 'echo ${projectVersion}'
        
         docker_cred= "Docker_hub"
         DockerImage=''
