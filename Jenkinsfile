@@ -31,7 +31,11 @@ pipeline
                 {
                     steps
                     {
-                        sh "${mvn} help:evaluate -Dexpression=project.version | grep -e '^[^\\[]'"
+                        script
+                        {
+                            def version = sh (script: "${mvn} help:evaluate -Dexpression=project.version | grep -e '^[^\\[]'", returnStdout: true).trim()
+                        }
+                        //sh "${mvn} help:evaluate -Dexpression=project.version | grep -e '^[^\\[]'"
                         sh '${mvn} install:install-file -Dfile=${WORKSPACE}/CS_Devops/apm_config/ojdbc6-11.2.0.3.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3.0 -Dpackaging=jar'
                         sh '${mvn} install:install-file -Dfile=${WORKSPACE}/CS_Devops/apm_config/sqljdbc4.jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc4 -Dversion=4.0 -Dpackaging=jar'
                         sh '${mvn} install:install-file -Dfile=${WORKSPACE}/CS_Devops/apm_config/bcm.jar -DgroupId=bcm -DartifactId=bcm -Dversion=1.0 -Dpackaging=jar'
@@ -67,6 +71,7 @@ pipeline
                         {
                            //DockerImage = docker.build docker_registry + ":$BUILD_NUMBER"
                             sh 'echo ${projectVersion}'
+                            sh 'echo ${version}'
                           sh 'docker build -f Dockerfile -t $docker_registry:$BUILD_NUMBER .'
                           //  sh 'sample'
                           
