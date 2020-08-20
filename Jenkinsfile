@@ -35,7 +35,7 @@ pipeline
                     {
                        script
                         {
-                            def version = ${projectVersion}.trim().substring(13,18)
+                            def version = projectVersion.trim().substring(13,18)
                         }
                         
                         sh 'echo ${version}'
