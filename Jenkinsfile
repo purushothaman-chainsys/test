@@ -22,14 +22,14 @@ pipeline
     }
         stages
             {
-            /*stage('checkout git repo')
+             stage('checkout git repo')
                 {
                     steps
                     {
                         
-                        git credentialsId:'bitbucket-credentials', changelog: false, poll: false, url: 'https://bitbucketdevops@bitbucket.org/ascap/apm_online_cloud.git'
+                        git credentialsId:'bitbucket-credentials', changelog: false, poll: false, url: 'https://github.com/purushothaman-chainsys/test.git'
                     }
-                }*/
+                }
                 stage('moving dependency packages')
                 {
                     steps
@@ -74,7 +74,7 @@ pipeline
                       
                     }
                 }
-                stage('Build Docker Image')
+                /*stage('Build Docker Image')
                 {
                     steps
                     {
@@ -179,4 +179,4 @@ def docker_clean()
     def image = 'ascap'
     sh "chmod +x cicd/docker-clean.sh"
     sh "./cicd/docker-clean.sh ${project}/${image}"
-}
+}*/
