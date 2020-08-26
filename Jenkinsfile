@@ -26,7 +26,7 @@ pipeline
                 {
                     steps
                     {
-                        git changelog: false, poll: false, url: 'https://github.com/purushothaman-chainsys/test.git'
+                        git credentialsId: 'github-repo', url: 'https://github.com/purushothaman-chainsys/test.git'
                     }
                 }
                 stage('moving dependency packages')
