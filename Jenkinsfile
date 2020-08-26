@@ -33,13 +33,13 @@ pipeline
                 {
                     steps
                     {
-                        // 'sh mkdir /tmp/java'
-                        //sh 'cp -R /var/lib/cloudbees-core-cm/workspace/apm_online_cloud/apm/jdk-11 /tmp/'
-                        //sh 'ls -ltr /tmp/jdk-11/bin/'
+                        /* 'sh mkdir /tmp/java'
+                        sh 'cp -R /var/lib/cloudbees-core-cm/workspace/apm_online_cloud/apm/jdk-11 /tmp/'
+                        sh 'ls -ltr /tmp/jdk-11/bin/'
                         sh 'docker ps'
                         sh 'hostname -i'
                         sh 'hostname'
-                        sh 'ls -ltr /var/lib/cloudbees-core-cm/workspace/apm_online_cloud/apm'
+                        sh 'ls -ltr /var/lib/cloudbees-core-cm/workspace/apm_online_cloud/apm'*/
                         //sh 'echo ${projectVersion}'
                         sh './mvnw install:install-file -Dfile=${WORKSPACE}/apm_config/ojdbc6-11.2.0.3.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.3.0 -Dpackaging=jar'
                         sh './mvnw install:install-file -Dfile=${WORKSPACE}/apm_config/sqljdbc4.jar -DgroupId=sqlserver -DartifactId=sqljdbc4 -Dversion=4.0 -Dpackaging=jar'
@@ -62,7 +62,7 @@ pipeline
                         sh './mvnw install:install-file -Dfile=${WORKSPACE}/apm_config/httpmime-4.5.11.jar -DgroupId=org.apache.components -DartifactId=httpmime -Dversion=4.5.11 -Dpackaging=jar'
                         sh './mvnw -v'
                         sh 'java -version'
-                        sh 'docker images'
+                        //sh 'docker images'
                     }
                 }
                 stage('Build')
