@@ -6,7 +6,7 @@ nexus_flag = true
 main_branch = 'master'
 pipeline
 {
-    agent
+    /*agent
     {
         label 'worker2'
     }
@@ -19,7 +19,7 @@ pipeline
         def pom = readMavenPom(file: 'apm/pom.xml')
         def projectVersion = pom.getVersion()
 		def version = projectVersion.trim().substring(0,5)
-    }
+    }*/
         stages
             {
              stage('checkout git repo')
