@@ -179,3 +179,6 @@ def docker_clean()
     sh "chmod +x cicd/docker-clean.sh"
     sh "./cicd/docker-clean.sh ${project}/${image}"
 }*/
+	    }
+	
+	
